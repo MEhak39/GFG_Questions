@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+
+class LeaderFinder {
+    static ArrayList<Integer> leader(int[] A, int n) {
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        // Start iterating from the rightmost element
+        int maxRight = A[n - 1];
+        
+        // The rightmost element is always a leader
+        result.add(maxRight);
+        
+        // Iterate from second rightmost to the leftmost element
+        for (int i = n - 2; i >= 0; i--) {
+            // Check if the current element is greater than or equal to the maximum so far
+            if (A[i] >= maxRight) {
+                // Update the maximum element
+                maxRight = A[i];
+                
+                // Add the current element to the result as it is a leader
+                result.add(0, A[i]); // Add to the beginning of the list for order of appearance
+            }
+        }
+        
+        return result;
+    }
+    
+    public static void main(String[] args) {
+        int[] A1 = {16, 17, 4, 3, 5, 2};
+        int n1 = 6;
+        System.out.println(leader(A1, n1)); // Output: [17, 5, 2]
+        
+        int[] A2 = {1, 2, 3, 4, 0};
+        int n2 = 5;
+        System.out.println(leader(A2, n2)); // Output: [4, 0]
+    }
+}
